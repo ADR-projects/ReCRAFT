@@ -1,4 +1,4 @@
-# ReCraft
+# ReCRAFT
 
 Art and DIY craft idea generator powered by AI. Discover creative projects based on your skillset and recyclable materials.
 
