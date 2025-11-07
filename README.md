@@ -18,7 +18,7 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 - Productivity tracker
 - SEO-optimized with Next.js
 
-#### Preview
+## Preview
 <img src="public/preview.png" width="700" height="500"/>
 
 ## Status
