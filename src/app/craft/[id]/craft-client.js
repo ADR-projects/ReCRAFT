@@ -1,0 +1,98 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
+import {craftsData} from '../../../../src/assets/crafts.js'
+
+export default function CraftPageClient({ id }) {
+  const router = useRouter();
+
+ 
+  const craft = craftsData[id];
+
+  if (!craft) {
+    return (
+      <div className="min-h-screen bg-amber-50 flex items-center justify-center p-4">
+        <div className="bg-white border-4 border-black p-8 text-center">
+          <h1 className="text-2xl font-black mb-4">Craft Not Found</h1>
+          <button
+            onClick={() => router.push('/')}
+            className="bg-black text-white font-bold py-2 px-6 border-4 border-black hover:bg-white hover:text-black transition-colors"
+          >
+            Go Back Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-amber-50">
+      <header className="border-b-4 border-black bg-pink-300 py-6 px-4">
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={() => router.push('/')}
+            className="flex items-center gap-2 bg-black text-white font-bold py-2 px-4 border-4 border-black hover:bg-white hover:text-black transition-colors mb-4"
+          >
+            <ArrowLeft size={20} />
+            Back
+          </button>
+          <h1 className="text-3xl md:text-4xl font-black text-black">{craft.title}</h1>
+        </div>
+      </header>
+
+      <main className="max-w-4xl mx-auto px-4 py-8">
+        <div className="bg-white border-4 border-black overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] mb-8">
+          <div className="h-64 md:h-96 bg-gray-200 border-b-4 border-black">
+            <img src={craft.image} alt={craft.title} className="w-full h-full object-cover" />
+          </div>
+          <div className="p-6 md:p-8">
+            <p className="text-lg mb-6">{craft.description}</p>
+
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-cyan-400 border-4 border-black p-4">
+                <h3 className="font-black mb-1">Difficulty</h3>
+                <p className="text-lg">{craft.difficulty}</p>
+              </div>
+              <div className="bg-pink-300 border-4 border-black p-4">
+                <h3 className="font-black mb-1">Time Needed</h3>
+                <p className="text-lg">{craft.time}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white border-4 border-black p-6 md:p-8 mb-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <h2 className="text-2xl font-black mb-4 border-b-4 border-black pb-2">Materials Needed</h2>
+          <ul className="space-y-2">
+            {craft.materials.map((material, index) => (
+              <li key={index} className="flex items-start gap-3">
+                <span className="bg-black text-white font-black px-2 py-1 text-sm mt-1">✓</span>
+                <span className="text-lg flex-1">{material}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="bg-white border-4 border-black p-6 md:p-8 mb-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <h2 className="text-2xl font-black mb-4 border-b-4 border-black pb-2">Step-by-Step Instructions</h2>
+          <ol className="space-y-4">
+            {craft.steps.map((step, index) => (
+              <li key={index} className="flex gap-4">
+                <span className="bg-orange-400 border-4 border-black font-black px-4 py-2 text-xl shrink-0">
+                  {index + 1}
+                </span>
+                <p className="text-lg flex-1 py-2">{step}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="bg-cyan-400 border-4 border-black p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <h2 className="text-2xl font-black mb-3">Pro Tips</h2>
+          <p className="text-lg">{craft.tips}</p>
+        </div>
+      </main>
+    </div>
+  );
+}
