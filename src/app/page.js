@@ -4,7 +4,7 @@ import ProfileSection from '@/components/ProfileSection.jsx';
 import Materials from '@/components/Materials.jsx';
 import CraftsGrid from '@/components/CraftsGrid.jsx';
 
-export default function Home() {
+export default function Home() { // here is an innocent comment
 
   return (
     <main className="min-h-screen bg-amber-50">
