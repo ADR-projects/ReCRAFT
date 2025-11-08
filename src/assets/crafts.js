@@ -8,7 +8,7 @@
       title: 'Mini Yarn Octopus Keychain 🐙',
       image: 'https://i.pinimg.com/1200x/7d/3f/d1/7d3fd17959ee10167a60b1599600cdda.jpg',
       materials: ['Yarn (any color)', 'Scissors', 'Small beads or googly eyes', 'Glue', 'Keychain ring'],
-      difficulty: 'Beginner',
+      difficulty: 'Easy',
       time: '15-20 minutes',
       steps: [
         'Cut about 20-25 strands of yarn, each 6 inches long.',
@@ -27,7 +27,7 @@
       title: 'Plastic Bottle Flower Vase 🌸',
       image: 'https://i.pinimg.com/736x/1a/fb/00/1afb00c4eddf5ac1b0031ac8f9a69f41.jpg',
       materials: ['Plastic bottle', 'Acrylic paint', 'Paintbrush', 'Yarn', 'Scissors', 'Hot glue gun (optional)'],
-      difficulty: 'Intermediate',
+      difficulty: 'Easy',
       time: '30-40 minutes',
       steps: [
         'Clean and dry the plastic bottle thoroughly.',
