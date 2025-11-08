@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { Edit2 } from "lucide-react";
 
-export default function ProfileSection() {
-  const [skills, setSkills] = useState("Crotchet, Origami");
-  const [themes, setThemes] = useState("Eco-friendly, Cutesy");
-  const [wantToTry, setWantToTry] = useState("Painting");
+export default function ProfileSection({ skills, setSkills, themes, setThemes, wantToTry, setWantToTry }) {
   const [isEditing, setIsEditing] = useState(false);
 
   return (

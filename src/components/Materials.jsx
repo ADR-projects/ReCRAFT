@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { Plus, X } from "lucide-react";
 
-export default function MaterialsSection() {
-  const [materials, setMaterials] = useState(["yarn", "plastic bottle", "waste paper"]);
+export default function MaterialsSection({ materials, setMaterials }) {
   const [newMaterial, setNewMaterial] = useState("");
 
   const addMaterial = () => {
