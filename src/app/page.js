@@ -32,7 +32,7 @@ export default function Home() { // here is an innocent comment
           title: craft.title,
           description: craft.description,
           image: craft.image,
-        }))
+        })) 
       );
   
     } 
