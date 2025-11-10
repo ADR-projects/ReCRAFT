@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
-console.log("HElllllo");
+console.log("Crafts route entrypoint!");
 
-console.log("before init ai")
+console.log("Crafts Route down here!")
 
 router.get('/', (req, res) => {
     console.log("crafts got!")
+    console.log('Requested URL:', req.originalUrl);
+    res.json({ message: "Crafts route reached successfully!" });
 })
 
 module.exports = router

@@ -14,16 +14,30 @@ export default function Home() { // here is an innocent comment
 
   const [generatedCrafts, setGeneratedCrafts] = useState([]);
 
-  // 🧠 Function to call backend API
+  // to call backend API
   const generateCraftIdeas = async () => {
-    const response = await fetch("/api/generate", {
+    const response = await fetch("http://localhost:5001/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ skills, themes, wantToTry, materials }),
     });
 
     const data = await response.json();
-    setGeneratedCrafts(data.ideas || []); // assume backend returns { ideas: [...] }
+    if (data.craftsData) {
+      console.log("Found the crafts.")
+      
+      setGeneratedCrafts(
+        Object.entries(data.craftsData).map(([id, craft]) => ({
+          id: Number(id),
+          title: craft.title,
+          description: craft.description,
+          image: craft.image,
+        }))
+      );
+  
+    } else {
+      console.error("No crafts data found", data);
+    }
   };
 
   return (
