@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
     console.log("Raw body:", req.body);
 
     const prompt = `
-      You are ReCRAFT AI.
+      You are CraftSpark-AI.
       Generate 2-3 creative craft/Art/DIY ideas as a JSON object in this exact format:
       {
         "1": {
