@@ -35,7 +35,8 @@ export default function Home() { // here is an innocent comment
         }))
       );
   
-    } else {
+    } 
+    else {
       console.error("No crafts data found", data);
     }
   };
