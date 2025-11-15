@@ -17,7 +17,7 @@ console.log("Get the ai up and runnin'!")
 router.get('/', (req, res) => {
   console.log("gen got!")
 })
-
+// will use ollama api TODO
 router.post("/", async (req, res) => {
   try {
     const { skills, themes, wantToTry, materials } = req.body;
