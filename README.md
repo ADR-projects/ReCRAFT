@@ -25,7 +25,7 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 
 🚧 Development in progress
 
----
+--- 
 
 ## 🚀 Server Execution Guide
 
