@@ -29,12 +29,11 @@ router.post("/", async (req, res) => {
 
     const prompt = `
       You are CraftSpark-AI.
-      Generate 2-3 creative craft/Art/DIY ideas as a JSON object in this exact format:
+      Generate 4-8 creative craft/Art/DIY ideas as a CLEAN JSON object in this exact format:
       {
         "1": {
           "title": "...",
-          "image": "https://example.com/image.jpg",
-          "description": "...",
+          "image": "xyg",
         },
         "2": {...},
         "3": {...}
@@ -43,9 +42,9 @@ router.post("/", async (req, res) => {
       Use themes like: ${themes}.
       Maker's Skills: ${skills}.
       Materials available to the Maker: ${materials.join(", ")}.
-      Crafts should be unique and detailed.
+      Craft title should be, maximum, around 5 words long.
+      Let the image URL remain "xyz".
       Do NOT send in markdown format, or include commentary.
-      KEEP the description brief, like a single-sentence summary.
     `;
 
     const response = await ai.models.generateContent({

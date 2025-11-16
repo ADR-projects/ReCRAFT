@@ -22,7 +22,7 @@ export default function Home() { // here is an innocent comment
       body: JSON.stringify({ skills, themes, wantToTry, materials }),
     });
 
-    if (res.status === 503) {
+    if (response.status === 503) {
       alert("AI is overloaded...please try again in a moment.");
       return;
     }
@@ -34,7 +34,6 @@ export default function Home() { // here is an innocent comment
         Object.entries(data.craftsData).map(([id, craft]) => ({
           id: Number(id),
           title: craft.title,
-          description: craft.description,
           image: craft.image,
         }))
       );
@@ -47,7 +46,7 @@ export default function Home() { // here is an innocent comment
 
   return (
     <main className="min-h-screen bg-amber-50">
-      <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
+      <div className="max-w-3xl mx-auto px-4 py-4 md:py-6">
         <Header />
         <ProfileSection
           skills={skills}
@@ -68,10 +67,9 @@ export default function Home() { // here is an innocent comment
             Generate Craft Ideas 🎨
           </button>
         </div>
-
-        <CraftsGrid crafts={generatedCrafts} />
-
       </div>
+      <div className="max-w-7xl mx-auto px-4"><CraftsGrid crafts={generatedCrafts} /></div>
+
     </main>
   );
 }

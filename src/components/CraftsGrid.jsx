@@ -12,7 +12,7 @@ export default function CraftGrid({ crafts }) {
     return (
 
         <section>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                 {crafts.map((craft) => (
                     <Link key={craft.id} href={`/craft/${craft.id}`}>
                         <div className="bg-white border-4 border-black overflow-hidden hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
