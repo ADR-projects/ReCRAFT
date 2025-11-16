@@ -26,16 +26,22 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 🚧 Development in progress
 
 
-## Getting Started
 
-First, run the development server:
+## 🚀 Server Execution Guide
+
+**1. Install Dependencies**
+
+```bash
+cd CraftSpark-AI
+npm install
+```
+**2. Create an env file and store a GEMINI API KEY in it.**
+
+```bash
+API_KEY = xxxxxxxxxxxxxxxxxxxx
+```
+**3. Concurrently run the Development Server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
