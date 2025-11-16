@@ -5,7 +5,7 @@ export default function CraftGrid({ crafts }) {
     if (!crafts.length) {
         return (
             <div className="text-center text-gray-500 font-medium py-8">
-                No ideas yet — click "Generate Craft Ideas 🎨" above!
+                No ideas yet, click "Generate Craft Ideas 🎨" above!
             </div>
         );
     }

@@ -17,7 +17,7 @@ console.log("Get the ai up and runnin'!")
 router.get('/', (req, res) => {
   console.log("gen got!")
 })
-// will use ollama api TODO
+// ollama api
 router.post("/", async (req, res) => {
   try {
     const { skills, themes, wantToTry, materials } = req.body;
@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
     console.log("Raw body:", req.body);
 
     const prompt = `
-      You are CraftSpark-AI.
+      You are ReMake-AI.
       Generate 2-3 creative craft/Art/DIY ideas as a JSON object in this exact format:
       {
         "1": {
