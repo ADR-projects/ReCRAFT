@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
   try {
     const { skills, themes, wantToTry, materials } = req.body;
     console.log("Post section")
-    //res.send({})
+  
     // This is the prompt
 
     console.log("Raw body:", req.body);
