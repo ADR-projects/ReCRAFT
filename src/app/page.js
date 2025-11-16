@@ -22,20 +22,24 @@ export default function Home() { // here is an innocent comment
       body: JSON.stringify({ skills, themes, wantToTry, materials }),
     });
 
+    if (res.status === 503) {
+      alert("AI is overloaded...please try again in a moment.");
+      return;
+    }
     const data = await response.json();
     if (data.craftsData) {
       console.log("Found the crafts.")
-      
+
       setGeneratedCrafts(
         Object.entries(data.craftsData).map(([id, craft]) => ({
           id: Number(id),
           title: craft.title,
           description: craft.description,
           image: craft.image,
-        })) 
+        }))
       );
-  
-    } 
+
+    }
     else {
       console.error("No crafts data found", data);
     }
