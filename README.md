@@ -19,7 +19,7 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 - SEO-optimized with Next.js
 
 ## Preview
-<img src="public/previewSS.png" width="500" height="350"/>
+<img src="public/previewSS.png" width="500" height="380"/>
 
 ## Status
 
