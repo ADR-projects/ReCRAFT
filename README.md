@@ -1,7 +1,7 @@
 # CraftSpark-AI
-
 Art and DIY craft idea generator powered by AI. Discover creative projects based on your skillset and recyclable materials.
 
+🗑️ Got waste? Don't be afraid to recycle it into beautiful art! 🎨
 ## Tech Stack
 
 [![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
