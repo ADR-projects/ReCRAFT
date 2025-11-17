@@ -9,22 +9,22 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 [![Twind](https://img.shields.io/badge/Twind-39B78F?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://twind.dev)
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
-[![MongoDB](https://img.shields.io/badge/MongoDB-13AA52?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
+<!-- [![MongoDB](https://img.shields.io/badge/MongoDB-13AA52?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com) -->
 
 ## Features
 
 - AI-powered craft suggestion engine
+- Click on a craft idea to get more details
 - Save ideas and steps to profile
-- Productivity tracker
 - SEO-optimized with Next.js
 
 ## Preview
 <img src="public/previewSS.png" width="500" height="380"/>
-<img src="public/previewDeet.png" width="500" height="400"/>
+<img src="public/previewDeet.png" width="500" height="500"/>
 
 ## Status
 
-🚧 Development in progress
+🚧 More Features are being added.
 
 --- 
 
@@ -36,10 +36,12 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 cd CraftSpark-AI
 npm install
 ```
-**2. Create an env file and store a GEMINI API KEY in it.**
+**2. Create an env file and store GEMINI API KEY, PEXELS API KEY and URL in it.**
 
 ```bash
 API_KEY = xxxxxxxxxxxxxxxxxxxx
+PEXELS_API_KEY = xxxxxxxxxxxxxxxxxxxx
+PEXELS_URL = xxxxxxxxxxxxxxxxxxxx
 ```
 **3. Concurrently run the Development Server**
 
