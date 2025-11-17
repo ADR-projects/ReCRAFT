@@ -5,14 +5,14 @@ export default function CraftGrid({ crafts }) {
     if (!crafts.length) {
         return (
             <div className="text-center text-gray-500 font-medium py-8">
-                No ideas yet — click "Generate Craft Ideas 🎨" above!
+                No ideas yet, click "Generate Craft Ideas 🎨" above!
             </div>
         );
     }
     return (
 
         <section>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                 {crafts.map((craft) => (
                     <Link key={craft.id} href={`/craft/${craft.id}`} prefetch={false}>
                         <div className="bg-white border-4 border-black overflow-hidden hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer">

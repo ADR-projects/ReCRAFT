@@ -14,28 +14,34 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 ## Features
 
 - AI-powered craft suggestion engine
-- User authentication for personalized recommendations
+- Save ideas and steps to profile
 - Productivity tracker
 - SEO-optimized with Next.js
 
 ## Preview
-<img src="public/preview.png" width="700" height="500"/>
+<img src="public/previewSS.png" width="500" height="380"/>
 
 ## Status
 
 🚧 Development in progress
 
+--- 
 
-## Getting Started
+## 🚀 Server Execution Guide
 
-First, run the development server:
+**1. Install Dependencies**
+
+```bash
+cd CraftSpark-AI
+npm install
+```
+**2. Create an env file and store a GEMINI API KEY in it.**
+
+```bash
+API_KEY = xxxxxxxxxxxxxxxxxxxx
+```
+**3. Concurrently run the Development Server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```

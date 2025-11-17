@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const Metadata = {
-  title: 'ReCRAFT',
+  title: 'ReMake - AI',
   description: 'Discover fun DIY projects using materials you already have!',
 };
 

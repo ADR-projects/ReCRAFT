@@ -31,7 +31,6 @@ export default function Home() { // here is an innocent comment
         const processed = Object.entries(data.craftsData).map(([id, craft]) => ({
           id: Number(id),
           title: craft.title,
-          description: craft.description,
           image: craft.image,
         }))
         setGeneratedCrafts(processed);
@@ -51,7 +50,7 @@ export default function Home() { // here is an innocent comment
 
   return (
     <main className="min-h-screen bg-amber-50">
-      <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
+      <div className="max-w-3xl mx-auto px-4 py-4 md:py-6">
         <Header />
         <ProfileSection
           skills={skills}
@@ -80,10 +79,9 @@ export default function Home() { // here is an innocent comment
             {isLoading ? "Generating..." : "Generate Craft Ideas 🎨"}
           </button>
         </div>
-
-        <CraftsGrid crafts={generatedCrafts} />
-
       </div>
+      <div className="max-w-7xl mx-auto pb-15 px-4"><CraftsGrid crafts={generatedCrafts} /></div>
+
     </main>
   );
 }
