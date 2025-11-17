@@ -3,6 +3,7 @@ const router = express.Router();
 console.log("AI handler entrypoint!")
 const { GoogleGenAI } = require("@google/genai");
 const dotenv = require("dotenv");
+const axios = require("axios");
 
 dotenv.config(); //load env var
 
@@ -22,7 +23,7 @@ router.post("/", async (req, res) => {
   try {
     const { skills, themes, wantToTry, materials } = req.body;
     console.log("Post section")
-  
+
     // This is the prompt
 
     console.log("Raw body:", req.body);
@@ -33,7 +34,7 @@ router.post("/", async (req, res) => {
       {
         "1": {
           "title": "...",
-          "image": "xyg",
+          "image": "...",
         },
         "2": {...},
         "3": {...}
@@ -43,7 +44,7 @@ router.post("/", async (req, res) => {
       Maker's Skills: ${skills}.
       Materials available to the Maker: ${materials.join(", ")}.
       Craft title should be, maximum, around 5 words long.
-      Let the image URL remain "xyz".
+      Let the image field contain a keyword related to the craft, eg. 'yarn' or 'electronics' or 'origami'.
       Do NOT send in markdown format, or include commentary.
     `;
 
@@ -66,13 +67,42 @@ router.post("/", async (req, res) => {
       console.error("Error parsing AI response:", e);
       return res.status(500).json({ error: "Failed to parse AI output" });
     }
-     
-    const customImageUrl = "https://images.pexels.com/photos/4219219/pexels-photo-4219219.jpeg"; 
-    Object.keys(parsed).forEach((key) => {
-      parsed[key].image = customImageUrl;
-    });
 
-    // res.json({ craftsData: parsed });
+    const fallbackImageURL = "https://images.pexels.com/photos/4219219/pexels-photo-4219219.jpeg";
+
+    async function getPexelsImage(query) {
+      try {
+        const res = await axios.get(process.env.PEXELS_URL, {
+          params: { query, per_page: 1 },
+          headers: {
+            Authorization: process.env.PEXELS_API_KEY
+          }
+        });
+
+        if (res.data.photos && res.data.photos.length > 0) {
+          return res.data.photos[0].src.medium;
+        }
+
+        return fallbackImageURL; // fallback
+      } catch (err) {
+        console.error("Pexels fetch error:", err);
+        return "https://via.placeholder.com/600x400?text=Error";
+      }
+    }
+
+
+    for (const key of Object.keys(parsed)) {
+      const craft = parsed[key];
+
+      const keyword = craft.image || "DIY craft";
+      // const keyword = "art"; // test
+      const imageUrl = await getPexelsImage(keyword);
+
+      craft.image = imageUrl;
+    }
+
+
+    // IMPORTANT:  HERE IS WHERE YOU PASS THE PARSED JSON 
     res.json({ craftsData: parsed });
 
   } catch (err) {

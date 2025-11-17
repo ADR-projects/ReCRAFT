@@ -68,7 +68,7 @@ export default function Home() { // here is an innocent comment
           </button>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-4"><CraftsGrid crafts={generatedCrafts} /></div>
+      <div className="max-w-7xl mx-auto pb-15 px-4"><CraftsGrid crafts={generatedCrafts} /></div>
 
     </main>
   );
