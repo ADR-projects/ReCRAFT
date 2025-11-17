@@ -26,6 +26,8 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 
 🚧 More Features are being added.
 
+👾 Currently using Gemini for AI text generation; future versions could integrate multiple models (Gemini, LLaMA 2, OpenAI GPT) with caching and queuing for scalability.
+
 --- 
 
 ## 🚀 Server Execution Guide
