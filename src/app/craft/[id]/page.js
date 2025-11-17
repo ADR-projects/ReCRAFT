@@ -1,15 +1,10 @@
-import CraftPageClient from './craft-client.js';
+import CraftDetailsClient from "./CraftDetails";
 
-export function generateStaticParams() {
-  return [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' }
-  ];
-}
+// export const dynamic = "force-dynamic"; 
+// ensures Next.js doesn't try to statically pre-render
 
-export default async function CraftPage({ params }) {
-
-  const {id} = await params;
-  return <CraftPageClient id={id} />;
+export default async function CraftDetailsPage({ params }) {
+  const { id } = await params;
+  const numericId = Number(id);
+  return <CraftDetailsClient id={numericId} />;
 }

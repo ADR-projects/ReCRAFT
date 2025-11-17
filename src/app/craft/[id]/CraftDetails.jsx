@@ -2,15 +2,55 @@
 
 import { useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
-import {craftsData} from '../../../../src/assets/crafts.js'
+// import {craftsData} from '../../../assets/crafts.js'
+import { useEffect, useState } from "react";
 
-export default function CraftPageClient({ id }) {
+console.log("🎃 DETAILS MOUNTED?!")
+
+export default function CraftDetailsClient({ id }) {
   const router = useRouter();
+  const [craft, setCraft] = useState(null);
+  const [details, setDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
- 
-  const craft = craftsData[id];
+  // load basic info 
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("generatedCrafts") || "[]");
+    const foundId = saved.find((c) => c.id === id);
+    setCraft(foundId || null);
+    console.log(`this has been clicked : ${foundId}`);
+  }, [id])
 
-  if (!craft) {
+  // fetch details for clicked idea from backend
+  useEffect(() => {
+    if (!id || !craft || !craft.title) return;
+
+
+    async function loadDetails() {
+      try {
+        const response = await fetch("http://localhost:5001/generate/details", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: craft.title,
+          }),
+        });
+
+        const data = await response.json();
+        setDetails(data);
+      }
+      catch (e) {
+        console.error(e);
+      }
+      finally {
+        setLoading(false);
+      }
+    }
+    loadDetails(); // call the load function!
+
+  }, [craft]);
+
+  if (!craft) { // details not found!
     return (
       <div className="min-h-screen bg-amber-50 flex items-center justify-center p-4">
         <div className="bg-white border-4 border-black p-8 text-center">
@@ -48,7 +88,7 @@ export default function CraftPageClient({ id }) {
           </div>
           <div className="p-6 md:p-8">
             <p className="text-lg mb-6">{craft.description}</p>
-
+            {/*
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="bg-cyan-400 border-4 border-black p-4">
                 <h3 className="font-black mb-1">Difficulty</h3>
@@ -59,6 +99,7 @@ export default function CraftPageClient({ id }) {
                 <p className="text-lg">{craft.time}</p>
               </div>
             </div>
+           */}
           </div>
         </div>
 
@@ -89,8 +130,8 @@ export default function CraftPageClient({ id }) {
         </div>
 
         <div className="bg-cyan-400 border-4 border-black p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="text-2xl font-black mb-3">Pro Tips</h2>
-          <p className="text-lg">{craft.tips}</p>
+          <h2 className="text-2xl font-black mb-3">Happy Crafting!</h2>
+          {/* <p className="text-lg">{craft.tips}</p> */}
         </div>
       </main>
     </div>

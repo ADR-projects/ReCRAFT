@@ -4,7 +4,7 @@ console.log("AI handler entrypoint!")
 const { GoogleGenAI } = require("@google/genai");
 const dotenv = require("dotenv");
 
-dotenv.config(); //load env var
+dotenv.config(); // load env var
 
 console.log("before init ai")
 
@@ -22,7 +22,6 @@ router.post("/", async (req, res) => {
   try {
     const { skills, themes, wantToTry, materials } = req.body;
     console.log("Post section")
-    //res.send({})
     // This is the prompt
 
     console.log("Raw body:", req.body);
@@ -34,7 +33,6 @@ router.post("/", async (req, res) => {
         "1": {
           "title": "...",
           "image": "https://example.com/image.jpg",
-          "description": "...",
         },
         "2": {...},
         "3": {...}
@@ -55,7 +53,7 @@ router.post("/", async (req, res) => {
     console.log(response.text);
     const text = response.text;
 
-    // Try to parse AI output as JSON
+    // parse the AI output as JSON
     let cleanText = text
       .replace(/```json/g, "")
       .replace(/```/g, "")
@@ -67,13 +65,12 @@ router.post("/", async (req, res) => {
       console.error("Error parsing AI response:", e);
       return res.status(500).json({ error: "Failed to parse AI output" });
     }
-     
-    const customImageUrl = "https://images.pexels.com/photos/4219219/pexels-photo-4219219.jpeg"; 
+
+    const customImageUrl = "https://images.pexels.com/photos/4219219/pexels-photo-4219219.jpeg";
     Object.keys(parsed).forEach((key) => {
       parsed[key].image = customImageUrl;
     });
 
-    // res.json({ craftsData: parsed });
     res.json({ craftsData: parsed });
 
   } catch (err) {
@@ -88,16 +85,36 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/details", async (req, res) => {
+  const { title, keyword } = req.body;
 
+  const prompt = `
+    Generate very concise description + materials + steps for:
+    Title: ${title}
+    Keyword: ${keyword}
 
-/**async function main() {
+    Return CLEAN exact JSON:
+    {
+      "description" : "...",
+      "materials": ["..."],
+      "steps": ["..."]
+    }
+
+    DO NOT INCLUDE COMMENTARY
+    Not more than 5 steps.
+    Keep your description as brief as possible. 
+  `;
+
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: "Explain how AI works in a few words",
+    contents: prompt,
   });
   console.log(response.text);
-}
+  const text = response.text;
+  const json = JSON.parse(text);
+  res.json(json);
+});
 
- main(); */
+
 
 module.exports = router

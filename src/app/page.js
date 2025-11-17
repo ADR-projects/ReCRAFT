@@ -7,37 +7,45 @@ import MaterialsSection from '@/components/Materials.jsx';
 import CraftsGrid from '@/components/CraftsGrid.jsx';
 
 export default function Home() { // here is an innocent comment
-  const [skills, setSkills] = useState("Crotchet, Origami");
+  const [skills, setSkills] = useState("Painting, Origami");
   const [themes, setThemes] = useState("Eco-friendly, Cutesy");
-  const [wantToTry, setWantToTry] = useState("Painting");
-  const [materials, setMaterials] = useState(["yarn", "plastic bottle", "waste paper"]);
-
+  const [wantToTry, setWantToTry] = useState("Clay-modelling");
+  const [materials, setMaterials] = useState(["clay", "plastic bottle", "waste paper",]);
+  const [isLoading, setIsLoading] = useState(false);
   const [generatedCrafts, setGeneratedCrafts] = useState([]);
 
   // to call backend API
   const generateCraftIdeas = async () => {
-    const response = await fetch("http://localhost:5001/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ skills, themes, wantToTry, materials }),
-    });
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://localhost:5001/generate/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ skills, themes, wantToTry, materials }),
+      });
 
-    const data = await response.json();
-    if (data.craftsData) {
-      console.log("Found the crafts.")
-      
-      setGeneratedCrafts(
-        Object.entries(data.craftsData).map(([id, craft]) => ({
+      const data = await response.json();
+      if (data.craftsData) {
+        console.log("Found the crafts.")
+
+        const processed = Object.entries(data.craftsData).map(([id, craft]) => ({
           id: Number(id),
           title: craft.title,
           description: craft.description,
           image: craft.image,
-        })) 
-      );
-  
-    } 
-    else {
-      console.error("No crafts data found", data);
+        }))
+        setGeneratedCrafts(processed);
+        localStorage.setItem("generatedCrafts", JSON.stringify(processed));
+      }
+      else {
+        console.error("No crafts data found", data);
+      }
+    }
+    catch (e) {
+      console.error("Error while generating", e);
+    }
+    finally {
+      setIsLoading(false);
     }
   };
 
@@ -59,9 +67,17 @@ export default function Home() { // here is an innocent comment
         <div className="text-center mb-8">
           <button
             onClick={generateCraftIdeas}
-            className="bg-slate-900 text-white font-bold py-3 px-6 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+            disabled={isLoading}
+            className={
+              `font-bold py-3 px-6 border-4 border-black transition-all
+     shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+     ${isLoading
+                ? "bg-gray-400 cursor-not-allowed shadow-none"
+                : "bg-slate-900 text-white hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+              }`
+            }
           >
-            Generate Craft Ideas 🎨
+            {isLoading ? "Generating..." : "Generate Craft Ideas 🎨"}
           </button>
         </div>
 
