@@ -117,24 +117,25 @@ router.post("/", async (req, res) => {
 });
 
 router.post("/details", async (req, res) => {
-  const { title, keyword } = req.body;
+  const { title } = req.body;
 
   const prompt = `
-    Generate very concise description + materials + steps for:
-    Title: ${title}
-    Keyword: ${keyword}
-
-    Return CLEAN exact JSON:
+    You are CraftSpark-AI. For the craft of title: ${title}, you need to generate simple details, like this:
+    Return CLEAN EXACT JSON:
     {
-      "description" : "...",
-      "materials": ["..."],
-      "steps": ["..."]
+      "description": "short description",
+      "materials": ["item 1", "item 2", "item 3"],
+      "steps": ["step 1", "step 2", "step 3"]
     }
 
-    DO NOT INCLUDE COMMENTARY
-    Not more than 5 steps.
-    Keep your description as brief as possible. 
-  `;
+    RULES:
+    - Keep everything short and concise.
+    - "materials" MUST be a JSON array of strings like: ["paper", "glue", "scissors"]
+    -"steps" MUST be a JSON array of max 5 strings like: ["Cut paper", "Glue pieces", "Let dry"]
+    - No markdown, no code blocks, no prose
+    - No trailing commas
+    `
+    ;
 
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",

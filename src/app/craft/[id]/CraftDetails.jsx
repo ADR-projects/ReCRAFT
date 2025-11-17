@@ -15,8 +15,12 @@ export default function CraftDetailsClient({ id }) {
 
   // load basic info 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("generatedCrafts") || "[]");
-    const foundId = saved.find((c) => c.id === id);
+    const saved = localStorage.getItem("generatedCrafts");
+    if (!saved) return;
+
+    const list = JSON.parse(saved);
+    const foundId = list.find(c => c.id === id);
+
     setCraft(foundId || null);
     console.log(`this has been clicked : ${foundId}`);
   }, [id])
@@ -37,7 +41,12 @@ export default function CraftDetailsClient({ id }) {
         });
 
         const data = await response.json();
-        setDetails(data);
+        setDetails(prevData => ({
+          ...prevData,
+          materials: data.materials,
+          steps: data.steps,
+          description: data.description,
+        }));
       }
       catch (e) {
         console.error(e);
@@ -87,7 +96,7 @@ export default function CraftDetailsClient({ id }) {
             <img src={craft.image} alt={craft.title} className="w-full h-full object-cover" />
           </div>
           <div className="p-6 md:p-8">
-            <p className="text-lg mb-6">{craft.description}</p>
+            <p className="text-lg mb-6">{details?.description || "Loading details..."}</p>
             {/*
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="bg-cyan-400 border-4 border-black p-4">
@@ -105,28 +114,36 @@ export default function CraftDetailsClient({ id }) {
 
         <div className="bg-white border-4 border-black p-6 md:p-8 mb-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h2 className="text-2xl font-black mb-4 border-b-4 border-black pb-2">Materials Needed</h2>
-          <ul className="space-y-2">
-            {craft.materials.map((material, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <span className="bg-black text-white font-black px-2 py-1 text-sm mt-1">✓</span>
-                <span className="text-lg flex-1">{material}</span>
-              </li>
-            ))}
-          </ul>
+          {!details ? (
+            <p>Loading materials...</p>
+          ) : (
+            <ul className="space-y-2">
+              {details.materials.map((material, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="bg-black text-white font-black px-2 py-1 text-sm mt-1">✓</span>
+                  <span className="text-lg flex-1">{material}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className="bg-white border-4 border-black p-6 md:p-8 mb-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h2 className="text-2xl font-black mb-4 border-b-4 border-black pb-2">Step-by-Step Instructions</h2>
-          <ol className="space-y-4">
-            {craft.steps.map((step, index) => (
-              <li key={index} className="flex gap-4">
-                <span className="bg-orange-400 border-4 border-black font-black px-4 py-2 text-xl shrink-0">
-                  {index + 1}
-                </span>
-                <p className="text-lg flex-1 py-2">{step}</p>
-              </li>
-            ))}
-          </ol>
+          {!details ? (
+            <p>Loading steps...</p>
+          ) : (
+            <ol className="space-y-4">
+              {details.steps.map((step, i) => (
+                <li key={i} className="flex gap-4">
+                  <span className="bg-orange-400 border-4 border-black font-black px-4 py-2 text-xl shrink-0">
+                    {i + 1}
+                  </span>
+                  <p className="text-lg flex-1 py-2">{step}</p>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
 
         <div className="bg-cyan-400 border-4 border-black p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
