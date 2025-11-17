@@ -14,7 +14,7 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 ## Features
 
 - AI-powered craft suggestion engine
-- User authentication for personalized recommendations
+- Save ideas and steps to profile
 - Productivity tracker
 - SEO-optimized with Next.js
 
