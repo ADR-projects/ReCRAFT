@@ -9,7 +9,7 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 [![Twind](https://img.shields.io/badge/Twind-39B78F?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://twind.dev)
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
-[![MongoDB](https://img.shields.io/badge/MongoDB-13AA52?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
+<!-- [![MongoDB](https://img.shields.io/badge/MongoDB-13AA52?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com) -->
 
 ## Features
 
