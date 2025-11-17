@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { crafts } from "../assets/crafts";
+// import { crafts } from "../assets/crafts";
 
 export default function CraftGrid({ crafts }) {
     if (!crafts.length) {
@@ -14,7 +14,7 @@ export default function CraftGrid({ crafts }) {
         <section>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                 {crafts.map((craft) => (
-                    <Link key={craft.id} href={`/craft/${craft.id}`}>
+                    <Link key={craft.id} href={`/craft/${craft.id}`} prefetch={false}>
                         <div className="bg-white border-4 border-black overflow-hidden hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
                             <div className="h-48 bg-gray-200 border-b-4 border-black overflow-hidden">
                                 <img src={craft.image} alt={craft.title} className="w-full h-full object-cover" />

@@ -5,7 +5,7 @@ const { GoogleGenAI } = require("@google/genai");
 const dotenv = require("dotenv");
 const axios = require("axios");
 
-dotenv.config(); //load env var
+dotenv.config(); // load env var
 
 console.log("before init ai")
 
@@ -23,7 +23,6 @@ router.post("/", async (req, res) => {
   try {
     const { skills, themes, wantToTry, materials } = req.body;
     console.log("Post section")
-
     // This is the prompt
 
     console.log("Raw body:", req.body);
@@ -55,7 +54,7 @@ router.post("/", async (req, res) => {
     console.log(response.text);
     const text = response.text;
 
-    // Try to parse AI output as JSON
+    // parse the AI output as JSON
     let cleanText = text
       .replace(/```json/g, "")
       .replace(/```/g, "")
@@ -117,16 +116,37 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/details", async (req, res) => {
+  const { title } = req.body;
 
+  const prompt = `
+    You are CraftSpark-AI. For the craft of title: ${title}, you need to generate simple details, like this:
+    Return CLEAN EXACT JSON:
+    {
+      "description": "short description",
+      "materials": ["item 1", "item 2", "item 3"],
+      "steps": ["step 1", "step 2", "step 3"]
+    }
 
-/**async function main() {
+    RULES:
+    - Keep everything short and concise.
+    - "materials" MUST be a JSON array of strings like: ["paper", "glue", "scissors"]
+    -"steps" MUST be a JSON array of max 5 strings like: ["Cut paper", "Glue pieces", "Let dry"]
+    - No markdown, no code blocks, no prose
+    - No trailing commas
+    `
+    ;
+
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: "Explain how AI works in a few words",
+    contents: prompt,
   });
   console.log(response.text);
-}
+  const text = response.text;
+  const json = JSON.parse(text);
+  res.json(json);
+});
 
- main(); */
+
 
 module.exports = router

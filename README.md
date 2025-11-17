@@ -20,6 +20,7 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 
 ## Preview
 <img src="public/previewSS.png" width="500" height="380"/>
+<img src="public/previewDeet.png" width="500" height="400"/>
 
 ## Status
 
