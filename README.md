@@ -15,7 +15,7 @@ Art and DIY craft idea generator powered by AI. Discover creative projects based
 
 - AI-powered craft suggestion engine
 - Click on a craft idea to get more details
-- Save ideas and steps to profile [TBA]
+- Save ideas and steps to profile
 - SEO-optimized with Next.js
 
 ## Preview
